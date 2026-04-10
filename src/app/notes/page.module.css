@@ -1,0 +1,426 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Summary cards */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.summaryCard {
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summaryCard:hover {
+  transform: translateY(-2px);
+}
+
+.summaryIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.summaryIconAll {
+  background: linear-gradient(135deg, var(--pr-100), var(--pr-200));
+  color: var(--pr-700);
+}
+
+.summaryIconActive {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1d4ed8;
+}
+
+.summaryIconDone {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  color: #047857;
+}
+
+.summaryIconUrgent {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #b45309;
+}
+
+@media (prefers-color-scheme: dark) {
+  .summaryIconAll { background: rgba(16, 185, 129, 0.15); }
+  .summaryIconActive { background: rgba(59, 130, 246, 0.15); }
+  .summaryIconDone { background: rgba(16, 185, 129, 0.15); }
+  .summaryIconUrgent { background: rgba(245, 158, 11, 0.15); }
+}
+
+.summaryLabel {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.summaryValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Filters */
+.filterRow {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--surface-color);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.filterBtn:hover {
+  border-color: var(--pr-400);
+  color: var(--pr-600);
+}
+
+.filterBtnActive {
+  background: var(--pr-500);
+  color: white;
+  border-color: var(--pr-500);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.filterBtnActive:hover {
+  background: var(--pr-600);
+  color: white;
+}
+
+/* Notes grid - card layout */
+.notesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+
+.noteCard {
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--trans-fast);
+  position: relative;
+}
+
+.noteCardDone {
+  opacity: 0.65;
+}
+
+.noteCardDone .noteTitle {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.notePriorityBar {
+  height: 4px;
+  width: 100%;
+}
+
+.priorityHigh {
+  background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.priorityNormal {
+  background: linear-gradient(90deg, var(--pr-500), var(--pr-400));
+}
+
+.priorityLow {
+  background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+}
+
+.noteBody {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.noteTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+}
+
+.noteTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.noteContent {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.noteContent::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(transparent, var(--surface-color));
+}
+
+.noteFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.noteMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.noteDate {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.noteActions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.actionBtn {
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  transition: all var(--trans-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.actionBtn:hover {
+  background: var(--bg-color);
+  color: var(--text-main);
+}
+
+.actionBtnDanger:hover {
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.actionBtnCheck:hover {
+  color: var(--pr-600);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+}
+
+.emptyIcon {
+  margin: 0 auto 1rem;
+  opacity: 0.4;
+}
+
+/* Modal form styling */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  width: 560px;
+  max-width: 90vw;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formLabel {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: inherit;
+  transition: border-color var(--trans-fast);
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--pr-500);
+}
+
+.formTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: inherit;
+  transition: border-color var(--trans-fast);
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--pr-500);
+}
+
+.formSelect {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color var(--trans-fast);
+  appearance: auto;
+}
+
+.formSelect:focus {
+  outline: none;
+  border-color: var(--pr-500);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Badge category colors */
+.badgeCategory {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.catUmum {
+  background: rgba(100, 116, 139, 0.1);
+  color: #475569;
+}
+
+.catHutang {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.catPiutang {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+}
+
+.catSerahTerima {
+  background: rgba(168, 85, 247, 0.1);
+  color: #7c3aed;
+}
+
+.catOperasional {
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+}
+
+@media (prefers-color-scheme: dark) {
+  .catUmum { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
+  .catHutang { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+  .catPiutang { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+  .catSerahTerima { background: rgba(168, 85, 247, 0.2); color: #a78bfa; }
+  .catOperasional { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+  .notesGrid {
+    grid-template-columns: 1fr;
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
