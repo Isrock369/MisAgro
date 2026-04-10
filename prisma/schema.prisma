@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id            String    @id @default(uuid())
+  barcode       String?   @unique
+  name          String
+  buyPrice      Int       @default(0)
+  sellPrice     Int       @default(0)
+  stockQuantity Int       @default(0)
+  minStockLevel Int       @default(5)
+  photoUrl      String?
+  
+  categoryId    String
+  category      Category  @relation(fields: [categoryId], references: [id])
+  orderItems    OrderItem[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  invoiceNumber String      @unique
+  totalAmount   Int         @default(0)
+  paymentMethod String      @default("CASH") // CASH, TRANSFER, QRIS
+  status        String      @default("COMPLETED")
+  
+  items         OrderItem[]
+  
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id            String    @id @default(uuid())
+  quantity      Int
+  priceAtTime   Int       // Harga jual pada saat transaksi
+  
+  orderId       String
+  order         Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+}
+
+model CashFlow {
+  id          String   @id @default(uuid())
+  type        String   // "INCOME" or "EXPENSE"
+  description String
+  amount      Int
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Supplier {
+  id          String   @id @default(uuid())
+  name        String
+  phone       String?
+  address     String?
+  category    String?
+  status      String   @default("ACTIVE")
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
