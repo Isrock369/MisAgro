@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Package, 
-  ShoppingCart, 
+import {
+  LayoutDashboard,
+  Package,
+  ShoppingCart,
   ArrowLeftRight,
   TrendingUp,
   FileText,
@@ -20,7 +20,7 @@ const navItems = [
   { name: "Kasir (POS)", href: "/pos", icon: ShoppingCart },
   { group: "Persediaan" },
   { name: "Manajemen Produk", href: "/products", icon: Package },
-  { name: "Impor Barang", href: "/imports", icon: ArrowLeftRight },
+  { name: "Impor Barang", href: "/impor", icon: ArrowLeftRight },
   { group: "Laporan & Keuangan" },
   { name: "Pemasukan & Pengeluaran", href: "/finance", icon: TrendingUp },
   { name: "Catatan Harian", href: "/notes", icon: FileText },
@@ -37,7 +37,7 @@ export default function Sidebar() {
         <Leaf className={styles.brandIcon} size={28} />
         <span className={styles.brandName}>MisAgro</span>
       </div>
-      
+
       <nav className={styles.nav}>
         {navItems.map((item, index) => {
           if (item.group) {
@@ -52,8 +52,8 @@ export default function Sidebar() {
           const isActive = pathname === item.href || (pathname.startsWith(item.href!) && item.href !== "/");
 
           return (
-            <Link 
-              key={item.href} 
+            <Link
+              key={item.href}
               href={item.href!}
               className={`${styles.navItem} ${isActive ? styles.active : ""}`}
             >
